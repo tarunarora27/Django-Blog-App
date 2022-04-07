@@ -1,0 +1,17 @@
+{% extends 'posts/base.html' %}
+
+{% block content %}
+    {% include 'posts/navbar.html' %}
+    <h2 class = "mt-2 mb-2 ml-2"> Posts by - {{ view.kwargs.username }} </h2>
+    {% for post in posts %}
+        <div class="col px-md-5 mt-3">
+            <img src=" {{ post.author.profile.image.url }}" alt = "Image" width="50px" height="50px">
+            <h3> Title: <a style="text-decoration:none; color: black" onmouseover="this.style.color='blue'" onmouseout="this.style.color='black'" href = "{% url 'post-detail' post.id %}" >{{post.title}}</a> </h3>
+            <h5> Author: {{post.author}} </h5>
+            <h5> Description: {{post.description}} </h5>
+            <hr>
+        </div>
+    {% empty %}
+        <h3 class = "m-3">No articles yet Bruhhhh!!!! Write your first one nowww.....</h3>
+    {% endfor %}
+{% endblock %}

@@ -1,0 +1,27 @@
+{% extends 'posts/base.html' %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+    {% include 'posts/navbar.html' %}
+    {% if messages %}
+        {% for message in messages %}
+            <div class = "alert alert-{{ message.tags }}" >
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endif %}
+    <div class = "m-2">
+        <h2> {{ user | capfirst }}'s Profile</h2>
+        <div class = "container">
+            <img src="{{ user.profile.image.url }}" alt="Profile Pic">
+            <h4> Name: {{user.username | capfirst}} </h4>
+            <h4>Email: {{ user.email }}</h4>
+        </div>
+        <form method="POST", enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ u_form|crispy }}
+            {{ p_form|crispy }}
+            <button type="submit" class="mt-3 btn btn-primary">Update</button>
+        </form>
+    </div>
+{% endblock %}

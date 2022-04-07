@@ -1,0 +1,14 @@
+{% extends 'posts/base.html' %}
+
+{% block content %}
+    {% include 'posts/navbar.html' %}
+    {% for post in posts %}
+        <div class="col px-md-5 mt-3">
+            <img src=" {{ post.author.profile.image.url }}" alt = "Image" width="50px" height="50px">
+            <h3> Title: <a style="text-decoration:none; color: black" onmouseover="this.style.color='blue'" onmouseout="this.style.color='black'" href = "{% url 'post-detail' post.id %}" >{{post.title}}</a> </h3>
+            <h5> Author: <a style="text-decoration:none; color: black" onmouseover="this.style.color='blue'" onmouseout="this.style.color='black'" href = "{% url 'user-posts' post.author %}">{{post.author}}</a> </h5>
+            <h5> Description: {{post.description | truncatewords:50}} </h5>
+            <hr>
+        </div>
+    {% endfor %}
+{% endblock %}
